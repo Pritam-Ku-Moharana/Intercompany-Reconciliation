@@ -26,6 +26,9 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # =========================
 st.markdown("""
 <style>
+.block-container {
+    padding: 0 !important;
+}
 /* Main background */
 .stApp {
     background-color: #f7f7f7;
@@ -1768,5 +1771,6 @@ st.markdown("""
     © 2026 Jindal Stainless Steel. All rights reserved.
 </div>
 """, unsafe_allow_html=True)
+
 
 
