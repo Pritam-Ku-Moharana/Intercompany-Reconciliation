@@ -9,7 +9,7 @@ import base64
 # =========================
 st.set_page_config(
     page_title="Intercompany Reconciliation",
-    layout="centered"
+    layout="wide"
 )
 
 hide_streamlit_style = """
@@ -1768,4 +1768,5 @@ st.markdown("""
     © 2026 Jindal Stainless Steel. All rights reserved.
 </div>
 """, unsafe_allow_html=True)
+
 
