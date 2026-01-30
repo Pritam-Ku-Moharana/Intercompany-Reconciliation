@@ -102,90 +102,78 @@ canvas {
 
 </style>
 """, unsafe_allow_html=True)
-html_code = """
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: linear-gradient(135deg, #020617, #0f172a);
-    }
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-  </style>
-</head>
+bg_html = """
+<style>
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+</style>
 
-<body>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+<div id="bg-canvas"></div>
 
-  <script>
-    const scene = new THREE.Scene();
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      1,
-      1000
+<script>
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 1000);
+  camera.position.z = 400;
+
+  const renderer = new THREE.WebGLRenderer({ alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById("bg-canvas").appendChild(renderer.domElement);
+
+  const geometry = new THREE.BufferGeometry();
+  const count = 2000;
+  const positions = [];
+
+  for (let i = 0; i < count; i++) {
+    positions.push(
+      (Math.random() - 0.5) * 800,
+      (Math.random() - 0.5) * 800,
+      (Math.random() - 0.5) * 800
     );
-    camera.position.z = 400;
+  }
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
 
-    // Particles
-    const particlesCount = 2000;
-    const geometry = new THREE.BufferGeometry();
-    const positions = [];
+  const material = new THREE.PointsMaterial({
+    color: 0xff6e00,
+    size: 1.5,
+    opacity: 0.8,
+    transparent: true
+  });
 
-    for (let i = 0; i < particlesCount; i++) {
-      positions.push(
-        (Math.random() - 0.5) * 800,
-        (Math.random() - 0.5) * 800,
-        (Math.random() - 0.5) * 800
-      );
-    }
+  const particles = new THREE.Points(geometry, material);
+  scene.add(particles);
 
-    geometry.setAttribute(
-      'position',
-      new THREE.Float32BufferAttribute(positions, 3)
-    );
-
-    const material = new THREE.PointsMaterial({
-      color: 0xff6e00,
-      size: 1.5,
-      transparent: true,
-      opacity: 0.8
-    });
-
-    const particles = new THREE.Points(geometry, material);
-    scene.add(particles);
-
-    function animate() {
-      requestAnimationFrame(animate);
-      particles.rotation.y += 0.0008;
-      particles.rotation.x += 0.0004;
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  </script>
-</body>
-</html>
+  function animate() {
+    requestAnimationFrame(animate);
+    particles.rotation.y += 0.0007;
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>
 """
+components.html(bg_html, height=0)
 
-components.html(html_code, height=600)
+st.markdown("""
+<style>
+.stApp {
+  background: transparent;
+}
+.block-container {
+  background: rgba(15, 23, 42, 0.85);
+  padding: 2rem;
+  border-radius: 12px;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # =========================
 # HEADER WITH LOGO
 # =========================
@@ -1868,6 +1856,7 @@ st.markdown("""
     © 2026 Jindal Stainless Steel. All rights reserved.
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
