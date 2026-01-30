@@ -28,17 +28,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # =========================
 st.markdown("""
 <style>
-body {
-      margin: 0;
-      overflow: hidden;
-      background: lightwhite;
-}
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
+
 .block-container {
     padding: 10px 50px 20px 50px; 
     /* Top is 10px, Right is 20px, Bottom is 30px, Left is 40px */
@@ -1856,6 +1846,7 @@ st.markdown("""
     © 2026 Jindal Stainless Steel. All rights reserved.
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
