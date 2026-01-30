@@ -3,6 +3,8 @@ import time
 import pandas as pd
 from io import BytesIO
 import base64
+import streamlit as st
+import streamlit.components.v1 as components
 
 # =========================
 # PAGE CONFIG
@@ -26,6 +28,17 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # =========================
 st.markdown("""
 <style>
+body {
+      margin: 0;
+      overflow: hidden;
+      background: lightwhite;
+}
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 .block-container {
     padding: 10px 50px 20px 50px; 
     /* Top is 10px, Right is 20px, Bottom is 30px, Left is 40px */
@@ -89,7 +102,90 @@ st.markdown("""
 
 </style>
 """, unsafe_allow_html=True)
+html_code = """
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #020617, #0f172a);
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
 
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+
+  <script>
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      1,
+      1000
+    );
+    camera.position.z = 400;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Particles
+    const particlesCount = 2000;
+    const geometry = new THREE.BufferGeometry();
+    const positions = [];
+
+    for (let i = 0; i < particlesCount; i++) {
+      positions.push(
+        (Math.random() - 0.5) * 800,
+        (Math.random() - 0.5) * 800,
+        (Math.random() - 0.5) * 800
+      );
+    }
+
+    geometry.setAttribute(
+      'position',
+      new THREE.Float32BufferAttribute(positions, 3)
+    );
+
+    const material = new THREE.PointsMaterial({
+      color: 0xff6e00,
+      size: 1.5,
+      transparent: true,
+      opacity: 0.8
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      particles.rotation.y += 0.0008;
+      particles.rotation.x += 0.0004;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
+"""
+
+components.html(html_code, height=600)
 # =========================
 # HEADER WITH LOGO
 # =========================
@@ -1772,6 +1868,7 @@ st.markdown("""
     © 2026 Jindal Stainless Steel. All rights reserved.
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
