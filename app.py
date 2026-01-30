@@ -29,13 +29,12 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.markdown("""
 <style>
 
-.block-container {
-    padding: 10px 50px 20px 50px; 
-    /* Top is 10px, Right is 20px, Bottom is 30px, Left is 40px */
-}
-/* Main background */
 .stApp {
-    background-color: transparent;
+    background: transparent;
+}
+
+.block-container {
+    padding: 10px 50px 20px 50px;
 }
 
 /* Header bar */
@@ -47,40 +46,12 @@ st.markdown("""
     align-items: center;
 }
 
-/* Logo */
-.header img {
-    height: 70px;
-    margin-right: 15px;
-}
-
-/* Title */
-.header h3 {
-    color: #ff7a00;
-    font-size: 24px;
-    margin: 0;
-    text-align: center;
-}
-
 /* Upload box */
 .upload-box {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 20px;
     border-radius: 8px;
     border: 1px solid #ddd;
-}
-
-/* Buttons */
-.stButton > button {
-    background-color: #ff7a00;
-    color: white;
-    border-radius: 6px;
-    border: none;
-    padding: 10px 18px;
-    font-size: 16px;
-}
-
-.stButton > button:hover {
-    background-color: #e66a00;
 }
 
 /* Footer */
@@ -89,14 +60,14 @@ st.markdown("""
     text-align: center;
     color: gray;
 }
+
+/* Three.js canvas */
 #bg-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
 }
+
 
 </style>
 """, unsafe_allow_html=True)
@@ -1843,6 +1814,7 @@ st.markdown("""
     © 2026 Jindal Stainless Steel. All rights reserved.
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
