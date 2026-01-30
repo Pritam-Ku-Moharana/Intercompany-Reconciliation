@@ -89,11 +89,6 @@ st.markdown("""
     text-align: center;
     color: gray;
 }
-
-</style>
-""", unsafe_allow_html=True)
-bg_html = """
-<style>
 #bg-canvas {
   position: fixed;
   top: 0;
@@ -102,8 +97,10 @@ bg_html = """
   height: 100vh;
   z-index: -1;
 }
-</style>
 
+</style>
+""", unsafe_allow_html=True)
+bg_html = """
 <div id="bg-canvas"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
@@ -1846,6 +1843,7 @@ st.markdown("""
     © 2026 Jindal Stainless Steel. All rights reserved.
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
