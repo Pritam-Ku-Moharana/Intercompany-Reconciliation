@@ -35,7 +35,7 @@ st.markdown("""
 }
 /* Main background */
 .stApp {
-    background-color: #f7f7f7;
+    background-color: transparent;
 }
 
 /* Header bar */
@@ -1843,6 +1843,7 @@ st.markdown("""
     © 2026 Jindal Stainless Steel. All rights reserved.
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
